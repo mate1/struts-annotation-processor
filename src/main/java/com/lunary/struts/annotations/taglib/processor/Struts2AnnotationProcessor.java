@@ -125,7 +125,7 @@ public class Struts2AnnotationProcessor extends AbstractProcessor {
             Configuration config = new Configuration();
             config.setClassForTemplateLoading(getClass(), "");
             config.setObjectWrapper(new DefaultObjectWrapper());
-            config.setAutoFlush(true);
+            //config.setAutoFlush(true);
             saveAsXml(config);
             saveTemplates(config);
         }
@@ -289,6 +289,8 @@ public class Struts2AnnotationProcessor extends AbstractProcessor {
             final BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
             try {
                 template.process(data, writer);
+		System.out.println("flushing now...");
+                writer.flush();
             }
             finally {
                 writer.close();
